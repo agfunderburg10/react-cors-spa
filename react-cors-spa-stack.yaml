@@ -15,7 +15,7 @@ Resources:
     Type: 'AWS::ApiGateway::RestApi'
     Properties:
       Description: A simple CORS compliant API
-      Name: SimpleAPI
+      Name: SimpleAPI-CloudFormation
       EndpointConfiguration:
         Types:
           - REGIONAL
@@ -49,7 +49,7 @@ Resources:
             ResponseParameters:
               method.response.header.Access-Control-Allow-Origin: '''*'''
             ResponseTemplates:
-              application/json: "{\"message\": \"Hello World!\"}"
+              application/json: "{\"message\": \"Deployed using CloudFormation!\"}"
       MethodResponses:
         - StatusCode: 200
           ResponseParameters:
