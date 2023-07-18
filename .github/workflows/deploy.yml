@@ -1,0 +1,50 @@
+name: deploy
+
+on:
+  push:
+    branches:
+      - add-automated-deploy
+
+permissions:
+  id-token: write # This is required for requesting the JWT
+  contents: read  # This is required for actions/checkout
+
+env:
+  DEPLOY_REGION: us-east-2
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+      - name: setup node 18
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      - name: install dependencies
+        run: npm ci
+      - name: build
+        run: npm run build
+      - name: test
+        run: npm run test
+      - name: configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        # takes 180 seconds to timeout if role doesn't exist... no need to wait that long
+        timeout-minutes: 1
+        with:
+          aws-region: ${{ env.DEPLOY_REGION }}
+          role-to-assume: arn:aws:iam::812212307632:role/github/${{ github.repository }}
+      - name: deploy cloudformation infrastructure
+        run: |
+          aws cloudformation deploy --stack-name react-cors-spa-cfn --template-file react-cors-spa-stack.yaml
+      - name: deploy terraform infrastructure
+        run: |
+          terraform workspace select ${{ env.DEPLOY_REGION }}
+          terraform apply -auto-approve
+      - name: deploy static content
+        run: |
+          npm run deploy-static -- s3://react-cors-spa-sxcb7cnjm6
+          npm run deploy-static -- s3://react-cors-spa-hqpspjx5i0
+

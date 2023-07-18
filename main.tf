@@ -6,14 +6,11 @@ terraform {
 
     dynamodb_table = "afunderburg-development-terraform-locks"
     encrypt        = true
-
-    profile = "terraform_infrastructure_deployer"
   }
 }
 
 provider "aws" {
   region  = "us-east-2"
-  profile = "terraform_infrastructure_deployer"
   default_tags {
     tags = {
       environment   = "demo"
@@ -29,7 +26,6 @@ provider "aws" {
 provider "aws" {
   alias   = "use1"
   region  = "us-east-1"
-  profile = "terraform_infrastructure_deployer"
 }
 
 data "aws_region" "current" {}
