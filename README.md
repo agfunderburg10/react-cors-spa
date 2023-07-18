@@ -16,7 +16,7 @@ then start the application locally using the following command:
 
 In order to deploy to AWS, you have to take the following steps:
 1. Deploy the CloudFormation Template from the project (`react-cors-spa-stack.yaml`) using AWS CLI.
-    1. `aws cloudformation deploy --stack-name react-cors-spa-cfn --profile <YOUR_DEPLOY_PROFILE> --template-file react-cors-spa-stack.yaml --region us-east-1`
+    1. `aws cloudformation deploy --stack-name react-cors-spa-cfn --profile <YOUR_DEPLOY_PROFILE> --template-file react-cors-spa-stack.yaml`
 2. Once your stack is deployed, from the "Output" tab, identify the  S3 "Bucket" name
 3. Build the (using `npm build`) app for distribution
 4. Upload the content of the `build` folder into the S3 bucket identified at step 2
