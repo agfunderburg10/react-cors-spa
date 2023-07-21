@@ -30,6 +30,7 @@ lerna-debug.log*
 
 # Build folders
 build/
+package.zip
 
 # Local History for Visual Studio Code
 .history/
