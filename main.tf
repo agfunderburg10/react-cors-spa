@@ -37,6 +37,8 @@ locals {
 
   subdomain = "demo-spa-tf"
   domain    = "afunderburg.com"
+
+  common_logs_bucket = "afunderburg-development-common-logs"
 }
 
 resource "aws_api_gateway_rest_api" "main" {
@@ -287,7 +289,7 @@ resource "aws_cloudfront_distribution" "main" {
 
   logging_config {
     include_cookies = false
-    bucket          = "afunderburg-development-common-logs.s3.amazonaws.com"
+    bucket          = "${local.common_logs_bucket}.s3.amazonaws.com"
     prefix          = "cloudfront-access-logs/${local.project_name}-terraform"
   }
 
