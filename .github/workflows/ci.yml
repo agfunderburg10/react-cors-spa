@@ -35,7 +35,6 @@ jobs:
         run: npm run build
       - name: test
         run: npm run test
-
       - name: release
         id: release
         uses: google-github-actions/release-please-action@v3
@@ -45,6 +44,7 @@ jobs:
           package-name: release-please-action
           default-branch: add-automated-deploy
           prerelease: true
+          bootstrap-sha: fcc2e19069be3ee55c29e4ab19580d6e74965743 # exclude all commits prior to fork
       - name: store artifact
         if: ${{ steps.release.outputs.release_created }}
         uses: actions/upload-artifact@v3
