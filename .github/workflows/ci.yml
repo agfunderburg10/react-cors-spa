@@ -45,6 +45,7 @@ jobs:
           default-branch: add-automated-deploy
           prerelease: true
           bootstrap-sha: fcc2e19069be3ee55c29e4ab19580d6e74965743 # exclude all commits prior to fork
+          commit-search-depth: 100
       - name: store artifact
         if: ${{ steps.release.outputs.release_created }}
         uses: actions/upload-artifact@v3
