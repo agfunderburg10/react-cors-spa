@@ -58,5 +58,4 @@ jobs:
           # terraform apply -auto-approve
       - name: deploy static content
         run: |
-          BUCKET_S3_URI=s3://react-cors-spa-sxcb7cnjm6 npm run deploy-static
           BUCKET_S3_URI=s3://react-cors-spa-hqpspjx5i0 npm run deploy-static

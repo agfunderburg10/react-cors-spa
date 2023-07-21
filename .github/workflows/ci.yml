@@ -35,6 +35,11 @@ jobs:
         run: npm run build
       - name: test
         run: npm run test
+      # DEPLOY TO DEV ALWAYS ON MERGE TO MAIN - DEV IS CLOUDFORMATION
+      - name: deploy static content - dev
+        if: github.ref_name == 'add-automated-deploy'
+        run: |
+          BUCKET_S3_URI=s3://react-cors-spa-sxcb7cnjm6 npm run deploy-static
       - name: release
         id: release
         uses: google-github-actions/release-please-action@v3
@@ -46,9 +51,17 @@ jobs:
           prerelease: true
           bootstrap-sha: fcc2e19069be3ee55c29e4ab19580d6e74965743 # exclude all commits prior to fork
           commit-search-depth: 100
-      - name: store artifact
+      # ON RELEASE CREATION - STORE ARTIFACT FOR HIGHER ENV DEPLOYMENT
+      - name: zip deploy package
         if: ${{ steps.release.outputs.release_created }}
-        uses: actions/upload-artifact@v3
+        run: |
+          zip -r package.zip build
+      - name: upload artifact
+        uses: actions/upload-release-asset@v1
+        if: ${{ steps.release.outputs.release_created }}
+        # env:
+        #   GITHUB_TOKEN: ${{ github.token }}
         with:
-          name: artifact-package
-          path: build/
+          upload_url: ${{ steps.release.outputs.upload_url }}
+          asset_name: package.zip
+          asset_content_type: application/zip
