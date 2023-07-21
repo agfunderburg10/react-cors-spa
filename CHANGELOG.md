@@ -1,6 +1,6 @@
 # Changelog
 
-## [1.1.0-rc1](https://github.com/agfunderburg10/react-cors-spa/compare/v1.0.2-rc1...v1.1.0-rc1) (2023-07-21)
+## [1.1.0](https://github.com/agfunderburg10/react-cors-spa/compare/v1.0.2...v1.1.0) (2023-07-21)
 
 
 ### Features
@@ -8,15 +8,7 @@
 * add artifact upload ([48b893c](https://github.com/agfunderburg10/react-cors-spa/commit/48b893ca0f5c34cec1fdb70b172f549c250fef3d))
 * break build and deploy into 2 jobs ([8e62129](https://github.com/agfunderburg10/react-cors-spa/commit/8e62129f5e43ae60a481d1c2760cf5d1f1ab5d7b))
 
-## [1.1.0-rc1](https://github.com/agfunderburg10/react-cors-spa/compare/v1.0.2-rc1...v1.1.0-rc1) (2023-07-21)
-
-
-### Features
-
-* add artifact upload ([48b893c](https://github.com/agfunderburg10/react-cors-spa/commit/48b893ca0f5c34cec1fdb70b172f549c250fef3d))
-* break build and deploy into 2 jobs ([8e62129](https://github.com/agfunderburg10/react-cors-spa/commit/8e62129f5e43ae60a481d1c2760cf5d1f1ab5d7b))
-
-## [1.0.2-rc1](https://github.com/agfunderburg10/react-cors-spa/compare/v1.0.1...v1.0.2-rc1) (2023-07-21)
+## [1.0.2](https://github.com/agfunderburg10/react-cors-spa/compare/v1.0.1...v1.0.2-rc1) (2023-07-21)
 
 
 ### Bug Fixes
