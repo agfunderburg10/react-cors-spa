@@ -43,7 +43,7 @@ jobs:
           release-type: simple
           package-name: release-please-action
           default-branch: add-automated-deploy
-          prerelease: 'pre-release'
+          prerelease: true
           bootstrap-sha: fcc2e19069be3ee55c29e4ab19580d6e74965743 # exclude all commits prior to fork
           commit-search-depth: 100
       - name: store artifact
