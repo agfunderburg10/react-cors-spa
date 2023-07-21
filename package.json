@@ -20,7 +20,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy-static": "aws s3 sync ./build $BUCKET_S3_URI --exclude '*' --include 'index.html' && aws s3 sync ./build $BUCKET_S3_URI --exclude 'index.html' --size-only"
   },
   "eslintConfig": {
     "extends": [

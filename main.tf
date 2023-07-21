@@ -6,14 +6,11 @@ terraform {
 
     dynamodb_table = "afunderburg-development-terraform-locks"
     encrypt        = true
-
-    profile = "terraform_infrastructure_deployer"
   }
 }
 
 provider "aws" {
   region  = "us-east-2"
-  profile = "terraform_infrastructure_deployer"
   default_tags {
     tags = {
       environment   = "demo"
@@ -29,7 +26,6 @@ provider "aws" {
 provider "aws" {
   alias   = "use1"
   region  = "us-east-1"
-  profile = "terraform_infrastructure_deployer"
 }
 
 data "aws_region" "current" {}
@@ -41,6 +37,8 @@ locals {
 
   subdomain = "demo-spa-tf"
   domain    = "afunderburg.com"
+
+  common_logs_bucket = "afunderburg-development-common-logs"
 }
 
 resource "aws_api_gateway_rest_api" "main" {
@@ -291,7 +289,7 @@ resource "aws_cloudfront_distribution" "main" {
 
   logging_config {
     include_cookies = false
-    bucket          = "afunderburg-development-common-logs.s3.amazonaws.com"
+    bucket          = "${local.common_logs_bucket}.s3.amazonaws.com"
     prefix          = "cloudfront-access-logs/${local.project_name}-terraform"
   }
 
