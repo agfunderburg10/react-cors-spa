@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.0.2-rc1](https://github.com/agfunderburg10/react-cors-spa/compare/v1.0.1...v1.0.2-rc1) (2023-07-21)
+
+
+### Bug Fixes
+
+* attempt to use pre-release appropriately ([0f406d4](https://github.com/agfunderburg10/react-cors-spa/commit/0f406d41ae00afd58e894a3f510850a877d45858))
+* correct prerelease back to true ([ae17ec4](https://github.com/agfunderburg10/react-cors-spa/commit/ae17ec45427417810d905162bc653d0f6d404d9f))
+
 ## [1.0.1](https://github.com/agfunderburg10/react-cors-spa/compare/v1.0.0...v1.0.1) (2023-07-21)
 
 
