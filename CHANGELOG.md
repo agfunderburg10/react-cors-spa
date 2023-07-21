@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/agfunderburg10/react-cors-spa/compare/v1.0.0...v1.0.1) (2023-07-21)
+
+
+### Bug Fixes
+
+* reduce commit search depth for release action ([f61b499](https://github.com/agfunderburg10/react-cors-spa/commit/f61b499d97c77702870c870e9e6d06362ca9c3b4))
+
 ## 1.0.0 (2023-07-21)
 
 
