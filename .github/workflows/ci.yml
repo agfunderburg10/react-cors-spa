@@ -8,7 +8,11 @@ on:
     branches:
       - main
 
+env:
+  DEPLOY_REGION: us-east-2
+
 permissions:
+  id-token: write # This is required for requesting the JWT
   contents: write
   pull-requests: write
 
@@ -35,9 +39,30 @@ jobs:
         run: npm run build
       - name: test
         run: npm run test
+      - name: zip deploy package
+        run: |
+          zip -r package.zip build
+      - name: upload build artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: build
+          path: build
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs:
+      - ci
+    if: github.ref_name == 'add-automated-deploy'
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+      - name: download build artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: build
+          path: build
       # DEPLOY TO DEV ALWAYS ON MERGE TO MAIN - DEV IS CLOUDFORMATION
       - name: configure aws credentials
-        if: github.ref_name == 'add-automated-deploy'
         uses: aws-actions/configure-aws-credentials@v2
         # takes 180 seconds to timeout if role doesn't exist... no need to wait that long
         timeout-minutes: 1
@@ -45,13 +70,11 @@ jobs:
           aws-region: ${{ env.DEPLOY_REGION }}
           role-to-assume: arn:aws:iam::812212307632:role/github-actions/${{ github.repository }}
       - name: deploy static content - dev
-        if: github.ref_name == 'add-automated-deploy'
         run: |
           BUCKET_S3_URI=s3://react-cors-spa-sxcb7cnjm6 npm run deploy-static
       - name: release
         id: release
         uses: google-github-actions/release-please-action@v3
-        if: github.ref_name == 'add-automated-deploy'
         with:
           release-type: simple
           package-name: release-please-action
